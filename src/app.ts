@@ -19,6 +19,26 @@ app.listen(PORT, () => {
 
 
 
-app.use("/", (req: Request, res: Response) => {
-    res.send("Welcome TO the api");
+app.post("/SPU", (req: Request, res: Response) => {
+    const memberPoint = 1000
+    const {paymentPoint,studentId} = req.body //paymentPoint คือ ยอดชำระครับ ทุกๆ 100 บาทได้ 10 แต้ม
+    if(!paymentPoint || !studentId){
+        res.status(400).json({
+            status: "400",
+            msg : "กรุณากรอกข้อมูลให้ครบ"
+        })
+    }
+else {
+    const totalPointget = paymentPoint/10
+    const totalPointhave = memberPoint + totalPointget
+    res.status(200).json ({
+        status : "200",
+        msg : "success",
+        data : {
+            รหัสสมาชิกที่สะสมแต้ม : studentId,
+            จำนวนแต้มที่ได้รับ : totalPointget,
+            จำนวนแต้มทั้งหมด : totalPointhave
+        }
+    })
+}
    });
