@@ -29,7 +29,7 @@ app.post("/SPU", (req: Request, res: Response) => {
         })
     }
 else {
-    let totalPointget = paymentPoint/10
+    let totalPointget = Math.floor(paymentPoint/100) *10
     if(paymentPoint < 100) {
         totalPointget = 0
     }
